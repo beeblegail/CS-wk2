@@ -1,37 +1,39 @@
 # Author: Abbey Pates 
 # Date: 21/01/2018
 # Title: Week 2 Prep - Super Extension
-# Version 1.0
-import re
+# Version 1.0X
 
-x_loop = raw_input('please input the letter x')
-if not re.match("^[x]*$", x_loop):
-    print "Error! Only letter x allowed!"
-   
-def askUser(question , lowerLimit, upperLimit):
+def askUser(question):
    while True:
       try:
-         answer = int(raw_input(question))
+         answerRaw = raw_input(question)
+         answer = int(answerRaw)
       except ValueError:
-         print("Not an integer value...")
+         if answerRaw == 'X' :
+            exit() 
+         else:
+            print("Not an integer value...")
          continue
       else:
-         if (answer < lowerLimit) | (answer > upperLimit):
-            print("Not within the range " + str(lowerLimit) + " and " + str(upperLimit))
-         else:
-            return (answer)
-            break
+         return (answer)
+         break
+        
+def displayResults(start_number, increase, results):
+   counter = 0
+   while counter < results:
+      print( counter+1, ': ', start_number+increase*counter )
+      counter += 1
+   print('Output complete!')
+      
+
+if __name__ == '__main__':
+   while True:
+      print "\nAnswer with X to exit:"
+      start_number = askUser ("Please enter the start number:")
+      increase = askUser("Please enter the increase you would like:")
+      results = askUser ("Please enter the number of results you would like:")
+      displayResults(start_number, increase, results)
 
 
 
-counter = 0
 
-while counter < results:
-    print( counter+1, ': ', start_number+increase*counter )
-    counter += 1
-
-print('Output complete!')
-
-start_number = askUser ("Please enter the start number:",1 ,100)
-increase = askUser("Please enter the increase you would like:",1,100)
-results = askUser ("Please enter the number of results you would like:",1,100)
